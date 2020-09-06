@@ -1,6 +1,11 @@
 import { app, BrowserWindow, session } from "electron";
 import { resolve } from "path";
 
+const extensionFolderPath =
+  process.env.NODE_ENV === "dev"
+    ? resolve(__dirname, "../extension")
+    : resolve(__dirname, "../../../dist/extension"); //this is directly unter resources cause it is listed under "extraResources"
+
 async function createWindow() {
   const win = new BrowserWindow({
     resizable: false,
@@ -14,7 +19,7 @@ async function createWindow() {
     },
   });
 
-  await session.defaultSession.loadExtension(resolve("dist/extension"));
+  await session.defaultSession.loadExtension(extensionFolderPath);
 
   win.loadURL(
     "https://immersive-web.github.io/webxr-samples/immersive-vr-session.html"

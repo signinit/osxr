@@ -2,6 +2,7 @@
   "name": "osxr",
   "version": "0.0.1",
   "description": "Open Source XR Desktop",
+  "main": "dist/app",
   "scripts": {
     "start:development": "run-p start:development:electron start:development:desktop",
     "start:development:electron": "nodemon -e ts --watch src/extension --watch src/app --exec npm run start:development:electron:start",
@@ -14,14 +15,25 @@
     "build:app": "tsc -p ./app.tsconfig.json",
     "build:desktop": "",
     "build": "run-p build:extension build:desktop build:app",
-    "start": "electron dist/app"
+    "package:linux:32": "electron-builder --linux --ia32",
+    "package:win:64": "electron-builder --win --x64",
+    "start": "cross-env NODE_ENV=dev electron ."
+  },
+  "build": {
+    "productName": "osxr",
+    "extraResources": "dist/extension/**/*",
+    "directories": {
+      "output": "package"
+    }
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "before-build-webpack": "^0.2.9",
+    "cross-env": "^7.0.2",
     "del-cli": "^3.0.1",
     "electron": "^10.1.1",
+    "electron-builder": "^22.8.0",
     "i": "^0.3.6",
     "nodemon": "^2.0.4",
     "npm": "^6.14.8",
