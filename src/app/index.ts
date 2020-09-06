@@ -1,6 +1,9 @@
 import { app, BrowserWindow, session } from "electron";
 import { resolve } from "path";
 
+console.log(app.getGPUFeatureStatus());
+app.getGPUInfo("complete").then((val) => console.log(val));
+
 const extensionFolderPath =
   process.env.NODE_ENV === "dev"
     ? resolve(__dirname, "../extension")
@@ -17,7 +20,6 @@ async function createWindow() {
     webPreferences: {
       webgl: true,
       experimentalFeatures: true,
-      offscreen: true,
       nodeIntegration: true,
     },
   });
