@@ -1,9 +1,6 @@
 import { app, BrowserWindow, session } from "electron";
 import { resolve } from "path";
 
-console.log(app.getGPUFeatureStatus());
-app.getGPUInfo("complete").then((val) => console.log(val));
-
 const extensionFolderPath =
   process.env.NODE_ENV === "dev"
     ? resolve(__dirname, "../extension")
@@ -27,7 +24,8 @@ async function createWindow() {
   await session.defaultSession.loadExtension(extensionFolderPath);
 
   win.loadURL(
-    "https://immersive-web.github.io/webxr-samples/immersive-vr-session.html"
+    //"https://immersive-web.github.io/webxr-samples/immersive-vr-session.html"
+    "chrome://gpu/"
   );
   //win.loadFile("index.html");
 }
