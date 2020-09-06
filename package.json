@@ -15,8 +15,7 @@
     "build:app": "tsc -p ./app.tsconfig.json",
     "build:desktop": "",
     "build": "run-p build:extension build:desktop build:app",
-    "package:linux:32": "electron-builder --linux --ia32",
-    "package:win:64": "electron-builder --win --x64",
+    "package": "electron-builder",
     "start": "cross-env NODE_ENV=dev electron ."
   },
   "build": {
