@@ -15,6 +15,9 @@ async function createWindow() {
     height: 480,
     frame: false,
     webPreferences: {
+      webgl: true,
+      experimentalFeatures: true,
+      offscreen: true,
       nodeIntegration: true,
     },
   });
