@@ -15,7 +15,7 @@
     "build:app": "tsc -p ./app.tsconfig.json",
     "build:desktop": "",
     "build": "run-p build:extension build:desktop build:app",
-    "package:linux:arm": "electron-builder --linux:arm",
+    "package:linux:32": "electron-builder --linux --ia32",
     "package:win:64": "electron-builder --win --x64",
     "start": "cross-env NODE_ENV=dev electron ."
   },
@@ -24,6 +24,14 @@
     "extraResources": "dist/extension/**/*",
     "directories": {
       "output": "package"
+    },
+    "linux": {
+      "target": {
+        "target": "appimage",
+        "arch": [
+          "armv7l"
+        ]
+      }
     }
   },
   "author": "",
