@@ -1,0 +1,14 @@
+{
+  "name": "OSXR Chromium Extension",
+  "version": "1.0",
+  "description": "Inserts the polyfill for running webxr",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": ["file://*/*", "http://*/*", "https://*/*"],
+      "js": ["bundle.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ]
+}

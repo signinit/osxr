@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ES5",
+    "outDir": "dist/",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "baseUrl": "src",
+    "downlevelIteration": true
+  }
+}

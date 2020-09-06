@@ -1,0 +1,42 @@
+{
+  "name": "osxr",
+  "version": "0.0.1",
+  "description": "Open Source XR Desktop",
+  "scripts": {
+    "start:development": "run-p start:development:electron start:development:desktop",
+    "start:development:electron": "nodemon -e ts --watch src/extension --watch src/app --exec npm run start:development:electron:start",
+    "start:development:electron:start": "run-s start:development:electrion:build start",
+    "start:development:electrion:build": "run-p build:extension build:app",
+    "start:development:desktop": "",
+    "build:extension": "run-s build:extension:clean build:extension:webpack",
+    "build:extension:clean": "del-cli ./dist/extension/browser-bundle.js",
+    "build:extension:webpack": "webpack --config ./extension.webpack.config.js",
+    "build:app": "tsc -p ./app.tsconfig.json",
+    "build:desktop": "",
+    "build": "run-p build:extension build:desktop build:app",
+    "start": "electron dist/app"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "before-build-webpack": "^0.2.9",
+    "del-cli": "^3.0.1",
+    "electron": "^10.1.1",
+    "i": "^0.3.6",
+    "nodemon": "^2.0.4",
+    "npm": "^6.14.8",
+    "npm-run-all": "^4.1.5",
+    "raw-loader": "^4.0.1",
+    "ts-loader": "^8.0.3",
+    "tsconfig-paths-webpack-plugin": "^3.3.0",
+    "typescript": "^4.0.2",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {
+    "cardboard-vr-display": "^1.0.19",
+    "event-target-shim": "^5.0.1",
+    "gl-matrix": "^3.3.0",
+    "webxr-polyfill": "^2.0.3"
+  }
+}
