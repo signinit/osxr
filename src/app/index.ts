@@ -1,6 +1,8 @@
 import { app, BrowserWindow, session } from "electron";
 import { resolve } from "path";
 
+app.commandLine.appendSwitch("ignore-gpu-blacklist");
+
 const extensionFolderPath =
   process.env.NODE_ENV === "dev"
     ? resolve(__dirname, "../extension")
