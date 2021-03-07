@@ -28,6 +28,7 @@ At startup the electron app loades the plugin and display the home room website.
     * volume
     * shutdown
   * basic applications
+    * keyboard
     * command line
     * file explorer
     * browser
