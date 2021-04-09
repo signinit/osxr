@@ -23,11 +23,13 @@ async function createWindow() {
     },
   });
 
+  win.webContents.openDevTools()
+
   await session.defaultSession.loadExtension(extensionFolderPath);
 
   win.loadURL(
-    //"https://immersive-web.github.io/webxr-samples/immersive-vr-session.html"
-    "chrome://gpu/"
+    "https://immersive-web.github.io/webxr-samples/immersive-vr-session.html"
+    //"chrome://gpu/"
   );
   //win.loadFile("index.html");
 }

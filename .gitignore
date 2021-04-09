@@ -4,3 +4,4 @@ package
 !/dist/extension/
 /dist/extension/*
 !/dist/extension/manifest.json
+.idea
