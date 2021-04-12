@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="608pt" height="155pt" viewBox="0.00 0.00 607.56 155.00">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 151)">
+<title>Website</title>
+<g id="clust2" class="cluster">
+<title>cluster_electron</title>
+<polygon fill="transparent" stroke="#dddddd" points="136.9067,-8 136.9067,-139 407.8473,-139 407.8473,-8 136.9067,-8"/>
+<text text-anchor="middle" x="272.377" y="-122.4" font-family="Arial" font-size="14.00" fill="#000000">Electron</text>
+</g>
+<g id="clust1" class="cluster">
+<title>cluster_hardware</title>
+<polygon fill="transparent" stroke="#dddddd" points="8,-62 8,-139 116.9067,-139 116.9067,-62 8,-62"/>
+<text text-anchor="middle" x="62.4534" y="-122.4" font-family="Arial" font-size="14.00" fill="#000000">Hardware</text>
+</g>
+<!-- Sensors -->
+<g id="node1" class="node">
+<title>Sensors</title>
+<ellipse fill="none" stroke="#aaaaaa" cx="62.4534" cy="-88" rx="46.4068" ry="18"/>
+<text text-anchor="middle" x="62.4534" y="-83.8" font-family="Arial" font-size="14.00" fill="#000000">Sensors</text>
+</g>
+<!-- NodeJS App -->
+<g id="node2" class="node">
+<title>NodeJS App</title>
+<ellipse fill="none" stroke="#aaaaaa" cx="272.377" cy="-88" rx="65.4847" ry="18"/>
+<text text-anchor="middle" x="272.377" y="-83.8" font-family="Arial" font-size="14.00" fill="#000000">NodeJS App</text>
+</g>
+<!-- Sensors&#45;&gt;NodeJS App -->
+<g id="edge2" class="edge">
+<title>Sensors-&gt;NodeJS App</title>
+<path fill="none" stroke="#000000" d="M109.0422,-88C134.7585,-88 167.3295,-88 196.6081,-88"/>
+<polygon fill="#000000" stroke="#000000" points="196.8104,-91.5001 206.8104,-88 196.8103,-84.5001 196.8104,-91.5001"/>
+</g>
+<!-- WebXR Browser Extension -->
+<g id="node3" class="node">
+<title>WebXR Browser Extension</title>
+<ellipse fill="none" stroke="#aaaaaa" cx="272.377" cy="-34" rx="127.4406" ry="18"/>
+<text text-anchor="middle" x="272.377" y="-29.8" font-family="Arial" font-size="14.00" fill="#000000">WebXR Browser Extension</text>
+</g>
+<!-- NodeJS App&#45;&gt;WebXR Browser Extension -->
+<g id="edge1" class="edge">
+<title>NodeJS App-&gt;WebXR Browser Extension</title>
+<path fill="none" stroke="#000000" d="M272.377,-69.7902C272.377,-67.3082 272.377,-64.8262 272.377,-62.3443"/>
+<polygon fill="#000000" stroke="#000000" points="275.8771,-62.1406 272.377,-52.1406 268.8771,-62.1407 275.8771,-62.1406"/>
+</g>
+<!-- WebXR Website -->
+<g id="node4" class="node">
+<title>WebXR Website</title>
+<ellipse fill="none" stroke="#aaaaaa" cx="517.7059" cy="-34" rx="81.7175" ry="18"/>
+<text text-anchor="middle" x="517.7059" y="-29.8" font-family="Arial" font-size="14.00" fill="#000000">WebXR Website</text>
+</g>
+<!-- WebXR Browser Extension&#45;&gt;WebXR Website -->
+<g id="edge3" class="edge">
+<title>WebXR Browser Extension-&gt;WebXR Website</title>
+<path fill="none" stroke="#000000" d="M400.0713,-34C408.6797,-34 417.2549,-34 425.6271,-34"/>
+<polygon fill="#000000" stroke="#000000" points="425.7272,-37.5001 435.7272,-34 425.7271,-30.5001 425.7272,-37.5001"/>
+</g>
+</g>
+</svg>
