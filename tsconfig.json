@@ -5,7 +5,7 @@
     "outDir": "dist/",
     "esModuleInterop": true,
     "allowJs": true,
-    "baseUrl": "src",
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "baseUrl": "."
   }
 }

@@ -1,9 +1,8 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "rootDir": "src/app",
-    "outDir": "dist/app",
-    "baseUrl": "src/app"
+    "rootDir": "src",
+    "outDir": "dist"
   },
-  "include": ["src/app"]
+  "include": ["src/app", "src/node-extension-interface"]
 }
