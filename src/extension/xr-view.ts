@@ -2,7 +2,6 @@ import { XRViewport } from "./xr-session";
 import { XRWebGLLayer } from "./xr-webgl-layer";
 import { mat4 } from "gl-matrix";
 import { XRRigidTransform } from "./xr-rigid-transform";
-import { systemManager } from "./browser";
 
 export class XRView {
   private viewport: XRViewport = {

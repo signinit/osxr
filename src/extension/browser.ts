@@ -7,10 +7,7 @@ import WebVRDevice from "webxr-polyfill/src/devices/WebVRDevice";
 import { mat4, quat, vec3 } from "gl-matrix";
 import { XRSession } from "./xr-session";
 import { XRWebGLLayer } from "./xr-webgl-layer";
-import { SystemManager } from "./system-manager";
 import { XRDisplay } from "./display";
-
-export const systemManager = new SystemManager();
 
 class VRFrameData {
   rightViewMatrix = mat4.create();

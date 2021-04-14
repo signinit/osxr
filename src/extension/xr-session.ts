@@ -1,8 +1,9 @@
 import { XRWebGLLayer } from "./xr-webgl-layer";
 import { XRView } from "./xr-view";
-import { systemManager } from "./browser";
 import { EventTarget } from "event-target-shim";
 import { mat4 } from "gl-matrix";
+import {InputDevice} from "./input-device";
+import {KeyboardInput} from "./input/keyboard-input";
 
 export type XRRenderStateInit = {
   baseLayer?: XRWebGLLayer;
@@ -30,6 +31,7 @@ export class XRSession extends EventTarget {
     (time: DOMHighResTimeStamp, xrFrame: XRFrame) => void
   > = [];
 
+  private inputDevice = new KeyboardInput();
   private frame = new XRFrame(this);
 
   constructor(
@@ -44,7 +46,7 @@ export class XRSession extends EventTarget {
         return;
       }
       this.device.onFrameStart(this.sessionId, this.renderState);
-      systemManager.update();
+      this.inputDevice.update();
       this.frame.update(0.05); //TODO get eye offset from display
       const callbacks = this.frameCallbacks;
 
@@ -92,6 +94,10 @@ export class XRSession extends EventTarget {
     this.device.cancelAnimationFrame();
     this.frameCallbacks = [];
   }
+
+  getInputDevice(){
+    return this.inputDevice;
+  }
 }
 
 export class XRSessionEvent {
@@ -133,7 +139,7 @@ export class XRFrame {
   constructor(public session: XRSession) {}
 
   update(eyeOffset: number): void {
-    let headMatrix = systemManager.headTransform.matrix;
+    let headMatrix = this.session.getInputDevice().getHeadTransform().matrix;
 
     mat4.copy(this.leftEye.transform.matrix, headMatrix);
     mat4.translate(this.leftEye.transform.matrix, headMatrix, [

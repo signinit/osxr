@@ -32,6 +32,8 @@ async function createWindow() {
   
   registerFsInterfaceHandler()
 
+  win.webContents.openDevTools()
+
   await session.defaultSession.loadExtension(extensionFolderPath);
 
   /*win.loadURL(
