@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Open Source XR Desktop",
   "main": "dist/app",
-  "email": "bela@signinit.de",
+  "author": "Bela Bohlender <bela@signinit.de>",
   "scripts": {
     "start:development": "run-p start:development:electron start:development:desktop",
     "start:development:electron": "nodemon -e ts --watch src/extension --watch src/app --exec npm run start:development:electron:start",
@@ -34,7 +34,6 @@
       }
     }
   },
-  "author": "",
   "license": "ISC",
   "devDependencies": {
     "before-build-webpack": "^0.2.9",
