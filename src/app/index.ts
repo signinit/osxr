@@ -1,12 +1,18 @@
 import { app, BrowserWindow, session } from "electron";
 import { resolve } from "path";
+import { registerFsInterfaceHandler, setupNodeExtensionHandler } from "./node-extension-handler";
 
 app.commandLine.appendSwitch("ignore-gpu-blacklist");
 
 const extensionFolderPath =
   process.env.NODE_ENV === "dev"
     ? resolve(__dirname, "../extension")
-    : resolve(__dirname, "../../../dist/extension"); //this is directly unter resources cause it is listed under "extraResources"
+    : resolve(__dirname, "../../../dist/extension"); //this is directly under resources cause it is listed under "extraResources"
+
+const desktopFolderPath =
+  process.env.NODE_ENV === "dev"
+  ? resolve(__dirname, "../desktop")
+  : resolve(__dirname, "../../../dist/desktop"); //this is directly under resources cause it is listed under "extraResources"
 
 async function createWindow() {
   const win = new BrowserWindow({
@@ -22,16 +28,19 @@ async function createWindow() {
       nodeIntegration: true,
     },
   });
+  setupNodeExtensionHandler(win)
+  
+  registerFsInterfaceHandler()
 
   win.webContents.openDevTools()
 
   await session.defaultSession.loadExtension(extensionFolderPath);
 
-  win.loadURL(
+  /*win.loadURL(
     "https://immersive-web.github.io/webxr-samples/immersive-vr-session.html"
     //"chrome://gpu/"
-  );
-  //win.loadFile("index.html");
+  );*/
+  win.loadFile(resolve(desktopFolderPath, "index.html"));
 }
 
 // This method will be called when Electron has finished
