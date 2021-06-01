@@ -1,6 +1,9 @@
 import { app, BrowserWindow, session } from "electron";
 import { resolve } from "path";
-import { registerFsInterfaceHandler, setupNodeExtensionHandler } from "./node-extension-handler";
+import {
+  registerFsInterfaceHandler,
+  setupNodeExtensionHandler,
+} from "./node-extension-handler";
 
 app.commandLine.appendSwitch("ignore-gpu-blacklist");
 
@@ -11,8 +14,8 @@ const extensionFolderPath =
 
 const desktopFolderPath =
   process.env.NODE_ENV === "dev"
-  ? resolve(__dirname, "../desktop")
-  : resolve(__dirname, "../../../dist/desktop"); //this is directly under resources cause it is listed under "extraResources"
+    ? resolve(__dirname, "../desktop")
+    : resolve(__dirname, "../../../dist/desktop"); //this is directly under resources cause it is listed under "extraResources"
 
 async function createWindow() {
   const win = new BrowserWindow({
@@ -28,13 +31,16 @@ async function createWindow() {
       nodeIntegration: true,
     },
   });
-  setupNodeExtensionHandler(win)
-  
-  registerFsInterfaceHandler()
+  setupNodeExtensionHandler(win);
 
-  win.webContents.openDevTools()
+  registerFsInterfaceHandler();
 
-  await session.defaultSession.loadExtension(extensionFolderPath);
+  //win.webContents.openDevTools()
+
+  /*currently unable to load extensions with using loadFile: https://github.com/electron/electron/issues/24011
+  workarround is to load the extension directly in the webpage (osxr desktop)
+  */
+  //await session.defaultSession.loadExtension(extensionFolderPath);
 
   /*win.loadURL(
     "https://immersive-web.github.io/webxr-samples/immersive-vr-session.html"

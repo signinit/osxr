@@ -2,7 +2,7 @@ const { resolve } = require("path")
 
 module.exports = {
     mode: "development",
-    entry: "./src/desktop/index.ts",
+    entry: "./src/desktop/index.tsx",
     module: {
         rules: [
             {

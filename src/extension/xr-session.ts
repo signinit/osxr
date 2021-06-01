@@ -95,7 +95,7 @@ export class XRSession extends EventTarget {
     this.frameCallbacks = [];
   }
 
-  getInputDevice(){
+  getInputDevice(): InputDevice {
     return this.inputDevice;
   }
 }

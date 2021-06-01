@@ -56,7 +56,7 @@ function createGlobal(partialGlobal: any): any {
       (prev, cur) => ({ ...prev, [cur]: window[cur as any] }),
       {} as any
     ),
-    ...global,
+    ...globalThis,
     ...partialGlobal,
   };
   return customGlobal;

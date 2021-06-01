@@ -1,67 +1,97 @@
-import {InputDevice} from "../input-device";
-import {XRRigidTransform} from "../xr-rigid-transform";
-import {quat} from "gl-matrix";
+import { Euler, Quaternion, Vector3 } from "three";
+import { InputDevice } from "../input-device";
+import { XRRigidTransform } from "../xr-rigid-transform";
+
+//TODO: move this to the electron env
 
 export class KeyboardInput implements InputDevice {
+  private readonly headTransform = new XRRigidTransform();
 
-    private readonly headTransform = new XRRigidTransform();
+  private moveDirection = new Vector3();
+  private euler = new Euler(0,0,0, "YXZ");
 
-    private speed = 2;
+  private rotationSpeed = 0.06;
+  private moveSpeed = 0.1;
 
-    private rotX = 0;
-    private rotY = 0;
-    private rotZ = 0;
-    quaternion: quat = quat.create();
+  quaternion = new Quaternion();
 
-    private keyPressedList: Array<String>;
+  private keyPressedList: Array<String>;
 
-    constructor() {
-        const _this = this;
-        this.keyPressedList = [];
+  constructor() {
+    const _this = this;
+    this.keyPressedList = [];
 
-        window.addEventListener("keydown", function(event: KeyboardEvent){
-            _this.keyPressedList.push(event.key);
-        });
+    window.addEventListener("keydown", function (event: KeyboardEvent) {
+      _this.keyPressedList.push(event.key);
+    });
 
-        window.addEventListener("keyup", function(event: KeyboardEvent){
-            _this.keyPressedList = _this.keyPressedList.filter((value) => value != event.key);
-        });
+    window.addEventListener("keyup", function (event: KeyboardEvent) {
+      _this.keyPressedList = _this.keyPressedList.filter(
+        (value) => value != event.key
+      );
+    });
+  }
+
+  isKeyPressed(key: String) {
+    return this.keyPressedList.includes(key);
+  }
+
+  getHeadTransform(): XRRigidTransform {
+    return this.headTransform;
+  }
+
+  update(): void {
+    //TODO: use deltaTime
+    if (this.isKeyPressed("ArrowUp")) {
+      this.euler.x += this.rotationSpeed;
+    }
+    if (this.isKeyPressed("ArrowLeft")) {
+      this.euler.y += this.rotationSpeed;
+    }
+    if (this.isKeyPressed("ArrowDown")) {
+      this.euler.x -= this.rotationSpeed;
+    }
+    if (this.isKeyPressed("ArrowRight")) {
+      this.euler.y -= this.rotationSpeed;
+    }
+    this.moveDirection.set(0, 0, 0);
+    if (this.isKeyPressed("w")) {
+      this.moveDirection.z -= this.moveSpeed;
+    }
+    if (this.isKeyPressed("a")) {
+      this.moveDirection.x -= this.moveSpeed;
+    }
+    if (this.isKeyPressed("s")) {
+      this.moveDirection.z += this.moveSpeed;
+    }
+    if (this.isKeyPressed("d")) {
+      this.moveDirection.x += this.moveSpeed;
+    }
+    if (this.isKeyPressed("q")) {
+      this.moveDirection.y -= this.moveSpeed;
+    }
+    if (this.isKeyPressed("e")) {
+      this.moveDirection.y += this.moveSpeed;
     }
 
-    isKeyPressed(key: String){
-        return this.keyPressedList.includes(key);
+    this.quaternion.setFromEuler(this.euler);
+    this.headTransform.orientation = new DOMPointReadOnly(
+      this.quaternion.x,
+      this.quaternion.y,
+      this.quaternion.z,
+      this.quaternion.w
+    );
+
+    this.moveDirection.applyQuaternion(this.quaternion);
+
+    this.headTransform.position = new DOMPointReadOnly(
+      this.headTransform.position.x + this.moveDirection.x,
+      this.headTransform.position.y + this.moveDirection.y,
+      this.headTransform.position.z + this.moveDirection.z
+    );
+
+    if (this.isKeyPressed("r")) {
+      //TODO reset
     }
-
-    getHeadTransform(): XRRigidTransform {
-        quat.fromEuler(this.quaternion, this.rotY, this.rotX, this.rotZ);
-        this.headTransform.orientation = new DOMPointReadOnly(...this.quaternion);
-        this.headTransform.position = new DOMPointReadOnly();
-
-        return this.headTransform;
-    }
-
-    update(): void {
-        if (this.isKeyPressed("w")){
-            this.rotY += this.speed;
-        }
-        if (this.isKeyPressed("a")){
-            this.rotX += this.speed;
-        }
-        if (this.isKeyPressed("s")){
-            this.rotY -= this.speed;
-        }
-        if (this.isKeyPressed("d")){
-            this.rotX -= this.speed;
-        }
-        if (this.isKeyPressed("q")){
-            this.rotZ += this.speed;
-        }
-        if (this.isKeyPressed("e")){
-            this.rotZ -= this.speed;
-        }
-
-        if (this.isKeyPressed("p")){
-            this.rotZ = 0;
-        }
-    }
+  }
 }
