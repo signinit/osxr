@@ -1,6 +1,13 @@
 node_modules
 package
 /dist/*
+
 !/dist/extension/
 /dist/extension/*
 !/dist/extension/manifest.json
+
+!/dist/desktop/
+/dist/desktop/*
+!/dist/desktop/index.html
+
+.idea
